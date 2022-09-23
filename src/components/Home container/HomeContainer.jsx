@@ -40,13 +40,13 @@ export default function HomeContainer() {
             <div className='py-2 flex-1 flex items-center relative'>
                 <img className="ml-auto h-420 w-full lg:w-auto lg:h-650" src={HeroBg} alt='hero-bg' />
 
-                <div className='w-full h-full absolute top-0 left-0 flex items-center justify-center px-32 py-4 gap-4 flex-wrap'>
+                <div className='w-full h-full absolute top-0 left-0 flex items-center justify-center lg:px-32 py-4 gap-4 flex-wrap'>
                     {heroData && heroData.map((el) => (
-                        <div key={el.id} className='w-190 p-4 bg-cardOverlay backdrop-blur-md rounded-3xl flex flex-col items-center justify-center'>
-                            <img className='w-40 -mt-20' src={el.imageSrc} alt='i1' />
-                            <p className='text-xl font-semibold text-textColor mt-4'>{el.name}</p>
+                        <div key={el.id} className=' lg:w-150 p-4 bg-cardOverlay backdrop-blur-md rounded-3xl flex flex-col items-center justify-center drop-shadow-lg'>
+                            <img className='w-20 lg:w-40 -mt-10 lg:-mt-20' src={el.imageSrc} alt='i1' />
+                            <p className='text-base lg:text-xl font-semibold text-textColor mt-4'>{el.name}</p>
 
-                            <p className='text-sm text-lighttextGray font-semibold my-3'>{el.desp}</p>
+                            <p className='text-[12px] lg:text-sm text-lighttextGray font-semibold my-1 lg:my-3'>{el.desp}</p>
 
                             <p className='text-sm font-semibold text-headingColor'>
                                 <span className='text-xs text-red-600'>$</span> {el.price}</p>
