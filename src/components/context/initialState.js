@@ -3,7 +3,8 @@ import { fetchUser } from "../../utils/fetchLocalStorageData";
 const userInfo = fetchUser()
 
 const initialState = {
-    user: userInfo
+    user: userInfo,
+    foodItems: null,
 }
 
 export default initialState;
