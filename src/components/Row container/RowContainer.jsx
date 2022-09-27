@@ -1,39 +1,53 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import img from "../images/c1.png"
 import { MdShoppingBasket } from 'react-icons/md'
 import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 
-export default function RowContainer({ flag }) {
+export default function RowContainer({ flag, data, scrollValue }) {
+    const RowContainer = useRef()
+
+    useEffect(() => {
+        RowContainer.current.scrollLeft += scrollValue
+    }, [scrollValue]);
     return (
-        <div className={`w-full my-12 ${flag ? "overflow-x-scroll" : "overflow-x-hidden"}`}>
-            <div className='w-300 md:w-340 h-auto bg-cardOverlay rounded-lg p-2 my-12 backdrop-blur-lg hover:drop-shadow-lg'>
-                <div className='w-full flex items-center justify-between'>
-                    <motion.img
-                        whileHover={{ scale: 1.2 }}
-                        src={img}
-                        alt='food item'
-                        className='w-40 -mt-8 drop-shadow-2xl'
-                    />
-                    <motion.div
-                        whileTap={{ scale: 0.75 }}
-                        className='w-8 h-8 rounded-full bg-red-600 flex items-center justify-center 
+        <div
+            ref={RowContainer}
+            className={`w-full flex items-center gap-3 my-12 scroll-smooth ${flag
+                ? "overflow-x-scroll scrollbar-none"
+                : "overflow-x-hidden flex-wrap justify-center"
+                }`}>
+            {data && data.map((item) => (
+                <div key={item?.id} className='w-275 h-[200px] min-w-[275px] md:w-300 md:min-w-[300px] bg-cardOverlay rounded-lg p-2 my-12 backdrop-blur-lg hover:drop-shadow-lg flex flex-col items-center justify-evenly relative'>
+                    <div className='w-full flex items-center justify-between'>
+                        <motion.img
+                            whileHover={{ scale: 1.2 }}
+                            src={item?.imageURL}
+                            alt='food item'
+                            className='w-40 -mt-8 drop-shadow-2xl'
+                        />
+                        <motion.div
+                            whileTap={{ scale: 0.75 }}
+                            className='w-8 h-8 rounded-full bg-red-600 flex items-center justify-center 
                         cursor-pointer hover:shadow-md'>
-                        <MdShoppingBasket className='text-white' />
-                    </motion.div>
-                </div>
-                <div className='w-full flex flex-col items-end justify-end'>
-                    <p className='text-textColor font-semibold text-base md:text-lg'>
-                        Chocolate & Vanilla
-                    </p>
-                    <p className='mt-1 text-sm text-gray-500'>45 Calories</p>
-                    <div className='flex items-center gap-8'>
-                        <p className='text-lg text-headingColor font-semibold'>
-                            <span className='text-sm text-red-500'>$</span> 5.25
+                            <MdShoppingBasket className='text-white' />
+                        </motion.div>
+                    </div>
+                    <div className='w-full flex flex-col items-end justify-end'>
+                        <p className='text-textColor font-semibold text-base md:text-lg'>
+                            {item?.title}
                         </p>
+                        <p className='mt-1 text-sm text-gray-500'>{item?.calories} Calories</p>
+                        <div className='flex items-center gap-8'>
+                            <p className='text-lg text-headingColor font-semibold'>
+                                <span className='text-sm text-red-500'>$</span> {item?.price}
+                            </p>
 
+                        </div>
                     </div>
                 </div>
-            </div>
+
+            ))}
         </div>
     )
 }
