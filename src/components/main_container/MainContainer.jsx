@@ -6,16 +6,16 @@ import RowContainer from '../Row container/RowContainer'
 import { useStateValue } from '../context/StateProvider'
 import { useRef, useState, useEffect } from 'react'
 import MenuContainer from '../Menu container/MenuContainer'
-
+import CardContainer from '../card container/CardContainer'
 
 export default function MainContainer() {
 
-  const [{ foodItems }, dispatch] = useStateValue()
+  const [{ foodItems, cartShow }, dispatch] = useStateValue()
   const [scrollValue, setscrollValue] = useState(0);
 
   useEffect(() => {
 
-  }, [scrollValue]);
+  }, [scrollValue, cartShow]);
 
   return (
     <div className='w-full h-auto flex flex-col items-center justify-center'>
@@ -55,6 +55,11 @@ export default function MainContainer() {
 
       <sectionc className="w-full my-6">
         <MenuContainer />
+
+        {cartShow && (
+          <CardContainer />
+        )}
+
       </sectionc>
     </div>
   )
